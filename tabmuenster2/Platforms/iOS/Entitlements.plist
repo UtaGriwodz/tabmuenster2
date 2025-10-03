@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!--
+      Diese Datei definiert iOS-„Capabilities“ (Entitlements).
+      Trage hier nur das ein, was du wirklich brauchst.
+      Beispiele siehe unten, alle sind optional.
+    -->
+
+    <!-- Beispiel: Push Notifications aktivieren -->
+    <!--
+    <key>aps-environment</key>
+    <string>development</string>
+    -->
+
+    <!-- Beispiel: iCloud aktivieren -->
+    <!--
+    <key>com.apple.developer.icloud-services</key>
+    <array>
+        <string>CloudDocuments</string>
+    </array>
+    -->
+
+    <!-- Beispiel: Keychain-Sharing -->
+    <!--
+    <key>keychain-access-groups</key>
+    <array>
+        <string>$(AppIdentifierPrefix)com.companyname.tabmuenster</string>
+    </array>
+    -->
+
+</dict>
+</plist>

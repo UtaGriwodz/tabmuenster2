@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="tabmuenster.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:tabmuenster"
+    x:DataType="local:MainPage"
+    Title="Aufgaben der Taschengeldbörse Münster">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="CategoryLabel">
+                <Setter Property="TextColor" Value="#2D8B29" />
+                <Setter Property="FontFamily" Value="" />
+                <Setter Property="FontSize" Value="24" />
+            </Style>
+            <Style TargetType="Label" x:Key="QuartierLabel">
+                <Setter Property="TextColor" Value="#E30D2D" />
+                <Setter Property="FontFamily" Value="" />
+            </Style>
+            <Style TargetType="Label" x:Key="DescLabel">
+                <Setter Property="TextColor" Value="#444" />
+                <Setter Property="FontFamily" Value="" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="5">
+        <!-- Header -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="10" BackgroundColor="#e8e8e8">
+            <Image Source="ic_launcher_round.png" WidthRequest="65" HeightRequest="65" />
+            <Label Text="Taschengeldbörse" TextColor="#2D8B29" FontFamily="" FontSize="30" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+            <ImageButton Source="icons8_information_100.png" WidthRequest="25" HeightRequest="25" Clicked="ButtonImpressumClicked" />
+        </StackLayout>
+
+        <!-- List -->
+        <ListView x:Name="AufgabenListView" Grid.Row="1" ItemsSource="{Binding aufgaben}" RowHeight="100"
+                  ItemTapped="OnTap" ItemSelected="OnSelection" HasUnevenRows="False"
+                  SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Aufgabe">
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="White" Margin="2" Padding="8">
+                            <Image Source="{Binding Kategoriebild}" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" />
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="12,0,0,0">
+                                <Label Text="{Binding Quartier}" Style="{StaticResource QuartierLabel}" />
+                                <Label Text="{Binding Kategorie}" Style="{StaticResource CategoryLabel}" />
+                                <Label Text="{Binding Aufgabenbeschreibung}" Style="{StaticResource DescLabel}" LineBreakMode="TailTruncation" MaxLines="2"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Footer buttons -->
+        <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" BackgroundColor="White" Padding="10" Spacing="20">
+            <ImageButton Source="icons8nachricht100.png" Clicked="ButtonMailClicked" WidthRequest="75" HeightRequest="75" />
+            <ImageButton Source="icons8telefon100.png" Clicked="ButtonCallClicked" WidthRequest="75" HeightRequest="75" />
+            <ImageButton Source="icons8_info_100_ugr.png" Clicked="ButtonInfoClicked" WidthRequest="75" HeightRequest="75" />
+        </StackLayout>
+    </Grid>
+</ContentPage>

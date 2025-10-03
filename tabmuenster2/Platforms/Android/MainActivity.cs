@@ -1,0 +1,23 @@
+﻿using Android.App;
+using Android.Content.PM;
+using Android.OS;
+using Microsoft.Maui;
+
+namespace tabmuenster
+{
+    [Activity(
+        Label = "Taschengeldbörse Münster",
+        Theme = "@style/Maui.SplashTheme",
+        MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize
+                             | ConfigChanges.Orientation
+                             | ConfigChanges.UiMode
+                             | ConfigChanges.ScreenLayout
+                             | ConfigChanges.SmallestScreenSize
+                             | ConfigChanges.Density)]
+    public class MainActivity : MauiAppCompatActivity
+    {
+        // Keine OnCreate-Initialisierung mehr nötig.
+        // MAUI ruft automatisch MauiProgram.CreateMauiApp() auf.
+    }
+}
