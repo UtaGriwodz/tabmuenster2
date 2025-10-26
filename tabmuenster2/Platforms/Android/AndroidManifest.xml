@@ -1,31 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.companyname.tabmuenster"
-    android:versionCode="18"
-    android:versionName="18.0"
-    android:installLocation="internalOnly">
-
-    <!-- MAUI verwaltet min/target SDK normalerweise in der .csproj,
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.companyname.tabmuenster" android:versionCode="18" android:versionName="18.0" android:installLocation="internalOnly">
+	<!-- MAUI verwaltet min/target SDK normalerweise in der .csproj,
          kann hier aber optional verbleiben -->
-    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="35" />
-
-  <!--uses-permission android:name="android.permission.CALL_PHONE" /-->
-  <!--uses-permission android:name="android.permission.SEND_SMS" /-->
-
-  <queries>
-    <intent>
-      <action android:name="android.intent.action.SENDTO" />
-      <data android:scheme="mailto" />
-    </intent>
-  </queries>
-  
-    <application
-        android:label="Taschengeldbörse Münster"
-        android:icon="@mipmap/icons8_info_100_ugr"
-        android:allowBackup="true"
-        android:usesCleartextTraffic="true">
-        <!-- Intents für Mailversand wie im Original -->
-       
-    </application>
-
+	<!--uses-permission android:name="android.permission.CALL_PHONE" /-->
+	<!--uses-permission android:name="android.permission.SEND_SMS" /-->
+	<queries>
+		<intent>
+			<action android:name="android.intent.action.SENDTO" />
+			<data android:scheme="mailto" />
+		</intent>
+	</queries>
+	<uses-permission android:name="android.permission.INTERNET" />
+	<application android:label="Taschengeldbörse Münster" android:icon="@mipmap/icons8_info_100_ugr" android:allowBackup="true" android:usesCleartextTraffic="true">
+		<!-- Intents für Mailversand wie im Original -->
+	</application>
 </manifest>

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Java.Net;
+using Microsoft.Maui.ApplicationModel;     // PhoneDialer, Sms, Email
+using Microsoft.Maui.Controls;
+using Newtonsoft.Json;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.ApplicationModel;     // PhoneDialer, Sms, Email
-using Newtonsoft.Json;
 
 namespace tabmuenster
 {
@@ -71,10 +72,11 @@ namespace tabmuenster
 
         private async Task LoadDataAsync()
         {
+            string url = "https://cloud-11.datenbanken24.de/apps/tab/public.nsf/mobileRequest?openagent&callback=db24&FN=F3";
+
             try
             {
-                string url = "https://cloud-11.datenbanken24.de/apps/tab/public.nsf/mobileRequest?openagent&callback=db24&FN=F3";
-
+              
                 using var http = new HttpClient();
                 var responseText = await http.GetStringAsync(url).ConfigureAwait(false);
 
@@ -127,12 +129,44 @@ namespace tabmuenster
             }
             catch (Exception ex)
             {
+                // Kompletten Exception-Text ins Debug-Log schreiben
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 // Fehler sichtbar machen (Debug/Release beachten)
                 await MainThread.InvokeOnMainThreadAsync(() =>
-                    DisplayAlert("Fehler beim Laden", ex.Message, "OK"));
+                    DisplayAlert("Fehler beim Laden", ex.ToString(), "OK"));
+
+                // Test: kurz versuchen, die Anfrage mit deaktivierter Zertifikatsprüfung (nur zu Diagnose!)
+                bool insecureOk = await TryRequestWithInsecureHandlerAsync(url);
+                if (insecureOk)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                        DisplayAlert("Hinweis", "Unsichere Anfrage (Zertifikatsprüfung aus) hat funktioniert — vermutlich Problem mit Zertifikat/Kette oder TLS-Kompatibilität.", "OK"));
+                }
             }
         }
 
+        // Test-Methode: Anfrage mit deaktivierter Zertifikatsprüfung (NUR ZU DIAGNOSE, NICHT PRODUKTIV)
+        private async Task<bool> TryRequestWithInsecureHandlerAsync(string url)
+        {
+            try
+            {
+                var handler = new HttpClientHandler
+                {
+                    // Danger: nur für Test! Nicht in Produktion verwenden.
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+                using var http = new HttpClient(handler);
+                var text = await http.GetStringAsync(url).ConfigureAwait(false);
+                System.Diagnostics.Debug.WriteLine("Insecure request succeeded, length=" + (text?.Length ?? 0));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Insecure request failed: " + ex.ToString());
+                return false;
+            }
+        }
+        
         #region Hilfsmethoden & Konverter
         public string ConvertF1_to_Kategorie(string f1)
         {
