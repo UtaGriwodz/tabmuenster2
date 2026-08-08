@@ -26,28 +26,119 @@
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,*,Auto" Padding="5">
-        <!-- Header -->
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="10" BackgroundColor="#e8e8e8">
-            <Image Source="ic_launcher_round.png" WidthRequest="65" HeightRequest="65" />
-            <Label Text="Taschengeldbörse" TextColor="#2D8B29" FontFamily="" FontSize="30" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-            <ImageButton Source="icons8_information_100.png" WidthRequest="25" HeightRequest="25" Clicked="ButtonImpressumClicked" />
-        </StackLayout>
+        <!-- Header (CHANGED: Grid statt StackLayout für stabile Positionierung auf allen Geräten) -->
+        <Grid Padding="10" BackgroundColor="#e8e8e8" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto">
+            <!-- App-Icon -->
+            <Image Source="ic_launcher_round.png"
+                   WidthRequest="65"
+                   HeightRequest="65"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   Grid.Column="0" />
+
+            <!-- Titel: adaptive Schriftgröße, immer eine Zeile (keine Umbrüche) -->
+            <Label Text="Taschengeldbörse"
+       TextColor="#2D8B29"
+       VerticalTextAlignment="Center"
+       HorizontalTextAlignment="Center"
+       LineBreakMode="TailTruncation"
+       MaxLines="1"
+       Grid.Column="1"
+       VerticalOptions="Center"
+       HorizontalOptions="FillAndExpand">
+                <VisualStateManager.VisualStateGroups>
+                    <!-- CHANGED -->
+                    <VisualStateGroup Name="AdaptiveStates">
+                        <!-- very narrow phones -->
+                        <VisualState Name="Narrow">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="0" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Property="FontSize" Value="16" />
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <!-- small phones -->
+                        <VisualState Name="Small">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="360" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Property="FontSize" Value="20" />
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <!-- typical phones / tablets -->
+                        <VisualState Name="Medium">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="480" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Property="FontSize" Value="26" />
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <!-- large screens -->
+                        <VisualState Name="Wide">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="720" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Property="FontSize" Value="30" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <!-- CHANGED -->
+            </Label>
+
+
+            <!-- Info-Button rechts, immer sichtbar -->
+            <ImageButton Source="icons8_information.png"
+                         WidthRequest="28"
+                         HeightRequest="28"
+                         BackgroundColor="Transparent"
+                         VerticalOptions="Center"
+                         HorizontalOptions="End"
+                         Margin="6,0,0,0"
+                         Clicked="ButtonImpressumClicked"
+                         Grid.Column="2" />
+        </Grid>
 
         <!-- List -->
-        <ListView x:Name="AufgabenListView" Grid.Row="1" ItemsSource="{Binding aufgaben}" RowHeight="100"
-                  ItemTapped="OnTap" ItemSelected="OnSelection" HasUnevenRows="False"
-                  SeparatorVisibility="Default">
+        <ListView x:Name="AufgabenListView"
+          Grid.Row="1"
+          ItemsSource="{Binding aufgaben}"
+          ItemTapped="OnTap"
+          ItemSelected="OnSelection"
+          HasUnevenRows="True"
+          SeparatorVisibility="Default"
+          SeparatorColor="#E0E0E0">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Aufgabe">
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" BackgroundColor="White" Margin="2" Padding="8">
-                            <Image Source="{Binding Kategoriebild}" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" />
-                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="12,0,0,0">
-                                <Label Text="{Binding Quartier}" Style="{StaticResource QuartierLabel}" />
-                                <Label Text="{Binding Kategorie}" Style="{StaticResource CategoryLabel}" />
-                                <Label Text="{Binding Aufgabenbeschreibung}" Style="{StaticResource DescLabel}" LineBreakMode="TailTruncation" MaxLines="2"/>
-                            </StackLayout>
-                        </StackLayout>
+                        <Grid Padding="8" ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto,Auto,Auto">
+                            <Image Source="{Binding Kategoriebild}" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2" />
+
+                            <Label Text="{Binding Kategorie}"
+                 Style="{StaticResource CategoryLabel}"
+                 Grid.Column="1" Grid.Row="0"
+                 VerticalOptions="Start" />
+
+                            <Label Text="{Binding Quartier}"
+                 Style="{StaticResource QuartierLabel}"
+                 Grid.Column="1" Grid.Row="1"
+                 VerticalOptions="Start" LineBreakMode="TailTruncation" MaxLines="1" />
+
+                            <Label Text="{Binding Aufgabenbeschreibung}"
+                 Style="{StaticResource DescLabel}"
+                 Grid.Column="1" Grid.Row="2"
+                 VerticalOptions="Start" LineBreakMode="TailTruncation" MaxLines="2" />
+
+                            <!-- optional: manueller Separator (wenn du ListView-Separator nicht ausreichen soll) -->
+                            <!--BoxView HeightRequest="1" Color="#EFEFEF" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,8,0,0" HorizontalOptions="FillAndExpand"/-->
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -55,9 +146,9 @@
 
         <!-- Footer buttons -->
         <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" BackgroundColor="White" Padding="10" Spacing="20">
-            <ImageButton Source="icons8nachricht100.png" Clicked="ButtonMailClicked" WidthRequest="75" HeightRequest="75" />
-            <ImageButton Source="icons8telefon100.png" Clicked="ButtonCallClicked" WidthRequest="75" HeightRequest="75" />
-            <ImageButton Source="icons8_info_100_ugr.png" Clicked="ButtonInfoClicked" WidthRequest="75" HeightRequest="75" />
+            <ImageButton Source="icons8nachricht" Clicked="ButtonMailClicked" WidthRequest="75" HeightRequest="75" />
+            <ImageButton Source="icons8telefon" Clicked="ButtonCallClicked" WidthRequest="75" HeightRequest="75" />
+            <ImageButton Source="icons8_info_100_ugr" Clicked="ButtonInfoClicked" WidthRequest="75" HeightRequest="75" />
         </StackLayout>
     </Grid>
 </ContentPage>

@@ -5,7 +5,9 @@
       "nativeDebugging": false
     },
     "Profil \"1\"": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "remoteDebugEnabled": true,
+      "remoteDebugMachine": "Macbook Air"
     }
   }
 }

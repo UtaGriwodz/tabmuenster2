@@ -1,4 +1,4 @@
-﻿using Java.Net;
+﻿//using Java.Net;
 using Microsoft.Maui.ApplicationModel;     // PhoneDialer, Sms, Email
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
@@ -175,10 +175,8 @@ namespace tabmuenster
                 case "1": return "Gartenarbeit";
                 case "2": return "Einkaufsdienste / Botengänge";
                 case "3": return "Kleine Hilfen im Haushalt";
-                case "4": return "Begleithilfe";
-                case "5": return "Technik";
-                case "6": return "Tierpflege";
-                case "7": return "Veranstaltungshilfe";
+                case "4": return "Technik (Smartphone/PC)";
+                case "5": return "Tierpflege";
                 case "0": return "Sonstiges";
             }
             return "keine Kategorie gefunden";
@@ -191,10 +189,8 @@ namespace tabmuenster
                 case "1": return "ic_spa_active.png";
                 case "2": return "ic_shopping_cart_active.png";
                 case "3": return "ic_home.png";
-                case "4": return "ic_directions_walk_active.png";
-                case "5": return "ic_desktop_mac_active.png";
-                case "6": return "ic_pets_active.png";
-                case "7": return "ic_supervisor_account_active.png";
+                case "4": return "ic_desktop_mac_active.png";
+                case "5": return "ic_pets_active.png";
                 case "0": return "ic_timer.png";
             }
             return "ic_add.png";
@@ -314,7 +310,7 @@ namespace tabmuenster
                 return;
             }
 
-            string toEmail = "tab@muenster.de";
+            string toEmail = "info@taschengeldboerse-muenster.de";
             string emailSubject = "Interesse an: " + selektierteAufgabe.Aufgabenbeschreibung;
             string emailBody = "Ich habe Interesse, die Aufgabe '" + selektierteAufgabe.Aufgabenbeschreibung +
                        "' aus der Kategorie '" + selektierteAufgabe.Kategorie + "' zu übernehmen.('" +selektierteAufgabe.MyID+"')."+
@@ -358,7 +354,7 @@ namespace tabmuenster
  "Dann" + Environment.NewLine +
  "    ruf uns an 0251 / 14917752 (immer mit Vorwahl wählen und außerhalb der Sprechstunde gerne auf den AB sprechen)" + Environment.NewLine +
  "    oder" + Environment.NewLine +
- "    schreib uns eine E - Mail an tab@muenster.de" + Environment.NewLine +
+ "    schreib uns eine E - Mail an info@taschengeldboerse-muenster.de" + Environment.NewLine +
  "Wir melden uns daraufhin schnellstmöglich bei dir." + Environment.NewLine +
  Environment.NewLine +
  "https://www.taschengeldboerse-muenster.de" + Environment.NewLine +

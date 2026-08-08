@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.companyname.tabmuenster" android:versionCode="18" android:versionName="18.0" android:installLocation="internalOnly">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.companyname.tabmuenster" android:versionCode="25" android:versionName="25.0" android:installLocation="internalOnly">
 	<!-- MAUI verwaltet min/target SDK normalerweise in der .csproj,
          kann hier aber optional verbleiben -->
 	<!--uses-permission android:name="android.permission.CALL_PHONE" /-->
