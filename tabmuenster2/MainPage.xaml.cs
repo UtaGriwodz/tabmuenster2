@@ -3,6 +3,7 @@ using Microsoft.Maui.ApplicationModel;     // PhoneDialer, Sms, Email
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
 using System;
+using System.Globalization;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Net;
@@ -41,6 +42,31 @@ namespace tabmuenster
         public string? Aufgabenbeschreibung { get; set; }
         public string? Kategoriebild { get; set; }
         public string? MyID { get; set; }
+        // Hilfs-Eigenschaft für Screenreader: eine lesbare, zusammengesetzte Beschreibung
+        public string AccessibleName
+        {
+            get
+            {
+                try
+                {
+                    if (Application.Current?.Resources != null &&
+                        Application.Current.Resources.TryGetValue("AccessibleNameFormat", out var formatObj) &&
+                        formatObj is string format && !string.IsNullOrEmpty(format))
+                    {
+                        return string.Format(CultureInfo.CurrentUICulture, format,
+                            Kategorie ?? string.Empty,
+                            Quartier ?? string.Empty,
+                            Aufgabenbeschreibung ?? string.Empty);
+                    }
+                }
+                catch
+                {
+                    // Fallback auf einfache Formatierung bei Fehlern
+                }
+
+                return $"{Kategorie ?? string.Empty}, {Quartier ?? string.Empty}: {Aufgabenbeschreibung ?? string.Empty}";
+            }
+        }
     }
 
     public partial class MainPage : ContentPage

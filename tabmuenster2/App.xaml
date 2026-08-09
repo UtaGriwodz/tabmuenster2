@@ -21,6 +21,8 @@
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
+            <!-- Lokalisierbares Format für Accessibility-Name von Listeneinträgen -->
+            <x:String x:Key="AccessibleNameFormat">{0}, {1}: {2}</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

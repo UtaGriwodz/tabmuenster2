@@ -34,7 +34,8 @@
                    HeightRequest="65"
                    VerticalOptions="Center"
                    HorizontalOptions="Start"
-                   Grid.Column="0" />
+                   Grid.Column="0"
+                   AutomationProperties.IsInAccessibleTree="False" />
 
             <!-- Titel: adaptive Schriftgröße, immer eine Zeile (keine Umbrüche) -->
             <Label Text="Taschengeldbörse"
@@ -45,12 +46,13 @@
        MaxLines="1"
        Grid.Column="1"
        VerticalOptions="Center"
-       HorizontalOptions="FillAndExpand">
+       HorizontalOptions="FillAndExpand"
+       AutomationProperties.Name="Haupttitel: Taschengeldbörse">
                 <VisualStateManager.VisualStateGroups>
                     <!-- CHANGED -->
-                    <VisualStateGroup Name="AdaptiveStates">
+                <VisualStateGroup x:Name="AdaptiveStates">
                         <!-- very narrow phones -->
-                        <VisualState Name="Narrow">
+                        <VisualState x:Name="Narrow">
                             <VisualState.StateTriggers>
                                 <AdaptiveTrigger MinWindowWidth="0" />
                             </VisualState.StateTriggers>
@@ -60,7 +62,7 @@
                         </VisualState>
 
                         <!-- small phones -->
-                        <VisualState Name="Small">
+                        <VisualState x:Name="Small">
                             <VisualState.StateTriggers>
                                 <AdaptiveTrigger MinWindowWidth="360" />
                             </VisualState.StateTriggers>
@@ -70,7 +72,7 @@
                         </VisualState>
 
                         <!-- typical phones / tablets -->
-                        <VisualState Name="Medium">
+                        <VisualState x:Name="Medium">
                             <VisualState.StateTriggers>
                                 <AdaptiveTrigger MinWindowWidth="480" />
                             </VisualState.StateTriggers>
@@ -80,7 +82,7 @@
                         </VisualState>
 
                         <!-- large screens -->
-                        <VisualState Name="Wide">
+                        <VisualState x:Name="Wide">
                             <VisualState.StateTriggers>
                                 <AdaptiveTrigger MinWindowWidth="720" />
                             </VisualState.StateTriggers>
@@ -96,14 +98,17 @@
 
             <!-- Info-Button rechts, immer sichtbar -->
             <ImageButton Source="icons8_information.png"
-                         WidthRequest="28"
-                         HeightRequest="28"
+                         WidthRequest="44"
+                         HeightRequest="44"
                          BackgroundColor="Transparent"
                          VerticalOptions="Center"
                          HorizontalOptions="End"
                          Margin="6,0,0,0"
                          Clicked="ButtonImpressumClicked"
-                         Grid.Column="2" />
+                         Grid.Column="2"
+                         SemanticProperties.Description="Info"
+                         SemanticProperties.Hint="Informationen zur Taschengeldbörse"
+                         AutomationProperties.Name="Info" />
         </Grid>
 
         <!-- List -->
@@ -117,9 +122,10 @@
           SeparatorColor="#E0E0E0">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Aufgabe">
-                    <ViewCell>
+                    <ViewCell AutomationProperties.Name="{Binding AccessibleName}"
+                              AutomationProperties.HelpText="{Binding Aufgabenbeschreibung}">
                         <Grid Padding="8" ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto,Auto,Auto">
-                            <Image Source="{Binding Kategoriebild}" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2" />
+                            <Image Source="{Binding Kategoriebild}" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" Grid.Row="0" Grid.RowSpan="2" AutomationProperties.IsInAccessibleTree="False" />
 
                             <Label Text="{Binding Kategorie}"
                  Style="{StaticResource CategoryLabel}"
@@ -146,9 +152,12 @@
 
         <!-- Footer buttons -->
         <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" BackgroundColor="White" Padding="10" Spacing="20">
-            <ImageButton Source="icons8nachricht" Clicked="ButtonMailClicked" WidthRequest="75" HeightRequest="75" />
-            <ImageButton Source="icons8telefon" Clicked="ButtonCallClicked" WidthRequest="75" HeightRequest="75" />
-            <ImageButton Source="icons8_info_100_ugr" Clicked="ButtonInfoClicked" WidthRequest="75" HeightRequest="75" />
+            <ImageButton Source="icons8nachricht" Clicked="ButtonMailClicked" WidthRequest="75" HeightRequest="75"
+                         AutomationProperties.Name="Nachricht schreiben" AutomationProperties.HelpText="Öffnet das E‑Mail Formular" SemanticProperties.Description="Nachricht schreiben" SemanticProperties.Hint="Öffnet das E‑Mail Formular" />
+            <ImageButton Source="icons8telefon" Clicked="ButtonCallClicked" WidthRequest="75" HeightRequest="75"
+                         AutomationProperties.Name="Anrufen" AutomationProperties.HelpText="Ruft die Taschengeldbörse an" SemanticProperties.Description="Anrufen" SemanticProperties.Hint="Ruft die Taschengeldbörse an" />
+            <ImageButton Source="icons8_info_100_ugr" Clicked="ButtonInfoClicked" WidthRequest="75" HeightRequest="75"
+                         AutomationProperties.Name="Mehr Informationen" AutomationProperties.HelpText="Zeigt weitere Informationen zur Taschengeldbörse" SemanticProperties.Description="Mehr Informationen" SemanticProperties.Hint="Zeigt weitere Informationen zur Taschengeldbörse" />
         </StackLayout>
     </Grid>
 </ContentPage>
