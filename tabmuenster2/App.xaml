@@ -14,8 +14,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- Beispiel: globale Farbdefinitionen -->
-            <Color x:Key="PrimaryColor">#2D8B29</Color>
-            <Color x:Key="SecondaryColor">#E30D2D</Color>
+            <!--Color x:Key="PrimaryColor">#2D8B29</Color-->
+            <Color x:Key="PrimaryColor">#196F3D</Color>             <!-- dunkleres Grün, Kontrast zu weiß ≈ 5.7:1 -->
+            <!--Color x:Key="SecondaryColor">#E30D2D</Color-->
+            <Color x:Key="SecondaryColor">#A50F1A</Color>            <!-- dunkleres Rot, Kontrast zu weiß > 7:1 -->
 
             <!-- Beispiel für einen globalen Style -->
             <Style TargetType="Label">

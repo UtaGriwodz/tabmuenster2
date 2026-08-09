@@ -3,12 +3,14 @@ using Microsoft.Maui.ApplicationModel;     // PhoneDialer, Sms, Email
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
 using System;
-using System.Globalization;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
+//using static AVFoundation.AVMetadataIdentifiers;
 
 namespace tabmuenster
 {
@@ -396,7 +398,15 @@ namespace tabmuenster
             string ein_text = "Die Taschengeldbörse Münster – ein Gewinn für Jung und Alt" + Environment.NewLine +
                  Environment.NewLine +
                  "Träger und Kooperationspartner: " + Environment.NewLine +
-            "Die Taschengeldbörse ist ein Projekt der Stiftung Magdalenenhospital - Stadtteilinitiativen 'Von Mensch zu Mensch', Kooperationspartner ist die Kommunale Seniorenvertretung Münster." + Environment.NewLine +
+            "Die Taschengeldbörse ist ein Projekt der kommunal verwalteten Stiftung Magdalenenhospital', Kooperationspartner ist die Kommunale Seniorenvertretung Münster." + Environment.NewLine +
+            Environment.NewLine +
+            "Anbieter: Stiftung Magdalenenhospital Gasselstiege 13 48159 Münster" +
+             Environment.NewLine +
+             "Die Stiftung Magdalenenhospital ist eine rechtlich selbstständige Stiftung des bürgerlichen Rechts."+
+Environment.NewLine +
+"Vertreten durch: den Oberbürgermeister der Stadt Münster"+
+                Environment.NewLine +
+            "Kontakt: Telefon: 0251 14917752 E - Mail: info @taschengeldboerse-muenster.de" +
             Environment.NewLine +
             "https://www.taschengeldboerse-muenster.de" +
             Environment.NewLine +

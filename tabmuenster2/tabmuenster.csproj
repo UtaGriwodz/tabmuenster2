@@ -220,6 +220,10 @@
 	  <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.111" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Converters\" />
+	</ItemGroup>
+
 	<!--ItemGroup>
 	  <PackageReference Update="Microsoft.Maui.Controls" Version="9.0.120" />
 	</ItemGroup-->

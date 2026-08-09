@@ -10,12 +10,14 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label" x:Key="CategoryLabel">
-                <Setter Property="TextColor" Value="#2D8B29" />
+                <!--Setter Property="TextColor" Value="#2D8B29" /-->
+                <Setter Property="TextColor" Value="#196F3D" />   <!-- dunkleres Grün, besserer Kontrast -->
                 <Setter Property="FontFamily" Value="" />
                 <Setter Property="FontSize" Value="24" />
             </Style>
             <Style TargetType="Label" x:Key="QuartierLabel">
-                <Setter Property="TextColor" Value="#E30D2D" />
+                <!--Setter Property="TextColor" Value="#E30D2D" /-->
+                <Setter Property="TextColor" Value="#A50F1A" />   <!-- dunkleres Rot, besserer Kontrast -->
                 <Setter Property="FontFamily" Value="" />
             </Style>
             <Style TargetType="Label" x:Key="DescLabel">
@@ -39,7 +41,7 @@
 
             <!-- Titel: adaptive Schriftgröße, immer eine Zeile (keine Umbrüche) -->
             <Label Text="Taschengeldbörse"
-       TextColor="#2D8B29"
+       TextColor="#196F3D"
        VerticalTextAlignment="Center"
        HorizontalTextAlignment="Center"
        LineBreakMode="TailTruncation"
